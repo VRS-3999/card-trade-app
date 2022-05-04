@@ -35,6 +35,7 @@ class CarContainer extends Component<any, {}> {
   }
 
   handleCarFilter = () => {
+    this.clearCarFilter();
     let { carCatalog, carType, carValue} = this.state;
     if(carValue && carType) {
       let filterCars = carCatalog.filter(
