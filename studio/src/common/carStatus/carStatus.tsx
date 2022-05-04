@@ -34,14 +34,14 @@ class CarContainer extends Component<any, {}> {
     console.log(this.state.cartDataId);
   }
 
-  handleCarFilter = () => {
-    this.clearCarFilter();
+  handleCarFilter = async () => {
+    await this.clearCarFilter();
     let { carCatalog, carType, carValue} = this.state;
     if(carValue && carType) {
       let filterCars = carCatalog.filter(
         function(car){ 
           let inspectionValue = car[carType] as any;
-          return inspectionValue.includes(carValue);
+          return inspectionValue.toLowerCase().includes(carValue.toLowerCase());
         });
       this.setState({carCatalog: filterCars});
       message.success("Filter Applied", 1);
@@ -50,9 +50,9 @@ class CarContainer extends Component<any, {}> {
     }
   }
 
-  clearCarFilter = () => {
-    this.setState({carCatalog:carCatalog});
-    message.success("Filter Removed", 1);
+  clearCarFilter = async () => {
+    await this.setState({carCatalog:carCatalog});
+    // message.success("Filter Removed", 1);
   }
 
   carTypeSelection = (value: string) => {
