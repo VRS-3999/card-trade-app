@@ -1,0 +1,40 @@
+version: '2.3'
+
+networks:
+  studiosleeves-network:
+    driver: bridge
+
+volumes:
+  react_build: {}
+
+services:
+  
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile-Nginx
+    container_name: nginx
+    restart: unless-stopped
+    depends_on:
+     - react
+    ports:
+     - "4000:4000"
+    volumes:
+     - react_build:/var/www/html/
+    networks:
+     - studiosleeves-network
+    labels:
+      org.label-schema.group: "studiosleeves"
+
+
+  react:
+    container_name: react
+    build: 
+      context: studio
+      dockerfile: Dockerfile
+    networks:
+      - studiosleeves-network
+    volumes:
+      - react_build:/studiosleeves/build/
+    labels:
+      org.label-schema.group: "studiosleeves"

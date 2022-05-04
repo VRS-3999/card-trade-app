@@ -1,0 +1,79 @@
+// Filters Design
+.filters-car-box{
+    display: grid;
+    grid-template-columns: 1fr 0.1fr;
+    background: rgb(66 66 66 / 30%);
+    border-radius: 5px;
+    margin: 10px 0px 10px 0px;
+    box-shadow: 0 0 10px rgb(255 255 255) inset;
+}
+
+.filters-car-flex{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0 10px 10px;
+    justify-content: space-evenly;
+}
+
+.filter-car-input {
+	position: relative;
+    max-height: 32px;
+    margin-right: 0.8%;
+    margin-bottom: 5px;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.filter-car-input .car-inputFilter{
+	border: 1px solid white;
+    border-radius: 5px;
+ 	box-shadow: none !important;
+    width: 200px !important;
+    max-height: 32px;
+}
+
+.filter-car-input .ant-select-focused{
+	border-color: white;
+	border-width: 1px;
+}
+
+.filter-car-input .floating-camera-label {
+	position: absolute;
+	pointer-events: none;
+	top: 20%;
+	left: 10px;
+	transition: 0.2s ease all;
+    width: 100%;
+}
+
+.filter-car-input .ant-select-focused ~ .floating-camera-label{
+	top: -70%;
+	left: 10px;
+	font-size: 16px;
+	opacity: 1;
+    font-weight: bold;
+
+    .camera-arrow{
+        display: none;
+    }
+}
+
+.filter-car-btn {
+    margin-top: 28px;
+    padding-right: 10px;
+    display: flex;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.balancedRow{
+    padding-top: 2px !important;
+}
+
+.manageCart{
+    margin: 20px 20px 0 0;
+    padding: 20px;
+}

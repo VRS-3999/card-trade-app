@@ -1,0 +1,19 @@
+# NOTE: API_BASE_URL and SERVER_NAME are dynamically substituted as part of Docker build process
+server {
+    listen 4000;
+    listen [::]:4000;
+
+    root /var/www/html;
+
+    index index.html;
+
+    server_name $SERVER_NAME;
+
+    # This rule adds support for client side routing
+    # All URLs return the index.html
+    location / {
+        try_files $uri  $uri/ /index.html ;
+        add_header Cache-Control "no-cache";
+        add_header X-Frame-Options "SAMEORIGIN" always;
+    }
+}

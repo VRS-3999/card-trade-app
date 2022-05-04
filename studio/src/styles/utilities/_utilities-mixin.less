@@ -1,0 +1,53 @@
+#utilities {
+    .media-rules-base(@screen-size, @rules) {
+        @media (min-width: @screen-size) {
+            @rules();
+        }
+    }
+
+    // Usage  :   #utilities.media-rules('sm', { .... } );   
+    .media-rules(@screen-size-name, @rules) {
+        @screen-size : @{screen-@screen-size-name};
+        #utilities.media-rules-base(@screen-size, @rules);
+    }
+
+    .get-utility-rules(@breakpoint, @prop, @class, @values) {
+        each(@values, .(@sv, @sk, @si) {
+
+                @cls : if(isnumber(@sk)=true, if(@breakpoint ='', ~'@{class}-@{sv}', ~'@{class}-@{breakpoint}-@{sv}'), if(@breakpoint ='', ~'@{class}-@{sk}', ~'@{class}-@{breakpoint}-@{sk}'));
+
+                .@{cls} {
+                    each(@prop, .(@pv) {
+                            @{pv} : @sv  !important;
+                        }
+
+                    )
+                }
+            }
+
+        )
+    }
+
+    .parse-breakpoints(@prop, @class, @values, @responsive) when (@responsive =true) {
+        each(@breakpoint-prefix, {
+                #utilities.media-rules(@value, {
+                        #utilities.get-utility-rules(@value, @prop, @class, @values);
+                    }
+
+                );
+            }
+
+        )
+    }
+
+    .parse-utilities() {
+        each(@utilities, .(@uv, @uk, @ui) {
+                #utilities.get-utility-rules('', @uv[property], @uv[class], @uv[@values]);
+                #utilities.parse-breakpoints(@uv[property], @uv[class], @uv[@values], @uv[responsive]);
+            }
+
+        )
+    }
+
+
+}
